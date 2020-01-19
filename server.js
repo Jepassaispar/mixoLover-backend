@@ -8,6 +8,7 @@ const session = require("express-session");
 const cors = require("cors");
 const MongoStore = require("connect-mongo")(session);
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 // Server configuration
 const app = express();
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // app.use(cookieParser());
+app.use(bodyParser.json({ limit: "400mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "400mb", extended: true }));
 
 // Session
 app.use(

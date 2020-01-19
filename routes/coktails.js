@@ -150,6 +150,17 @@ router.post("/", uploadCloud.single("Image"), (req, res) => {
   // res.send("Ok");
 });
 
+router.post("/postAllCocktails", (req, res) => {
+  const allCocktails = [...req.body];
+  cocktailModel
+    .createMany(allCocktails)
+    .then(dbRes => {
+      console.log("all cocktails entered DB");
+      res.status(201).send(dbRes);
+    })
+    .catch(dbErr => res.status(500).send(dbErr));
+});
+
 // // findbyId cocktail and update
 router.patch(
   "/profile/edit-cocktail/:id",
